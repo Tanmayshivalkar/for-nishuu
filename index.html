@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Nishuu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+}
+
+/* Background slideshow */
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+filter:blur(10px) brightness(0.6);
+z-index:-1;
+animation:slide 18s infinite;
+}
+
+@keyframes slide{
+0%{background-image:url('photo1.jpg')}
+33%{background-image:url('photo2.jpg')}
+66%{background-image:url('photo3.jpg')}
+100%{background-image:url('photo1.jpg')}
+}
+
+/* Password screen */
+#lockScreen{
+position:absolute;
+}
+
+input{
+padding:12px;
+border-radius:25px;
+border:none;
+margin-top:20px;
+outline:none;
+}
+
+button{
+padding:12px 25px;
+border-radius:25px;
+border:none;
+margin-top:20px;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s ease;
+}
+
+#enterBtn{
+background:white;
+color:#ff4d6d;
+}
+
+/* Proposal Card */
+.card{
+display:none;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(20px);
+padding:40px;
+border-radius:25px;
+width:90%;
+max-width:400px;
+position:relative;
+}
+
+.card h1{
+font-family:'Dancing Script',cursive;
+font-size:42px;
+margin-bottom:20px;
+}
+
+#yesBtn{
+background:white;
+color:#ff4d6d;
+}
+
+#yesBtn:hover{
+transform:scale(1.1);
+}
+
+#noBtn{
+position:absolute;
+background:transparent;
+border:2px solid white;
+color:white;
+transition: 0.2s ease;
+}
+
+/* Love Letter */
+#letter{
+display:none;
+position:absolute;
+width:90%;
+max-width:500px;
+background:rgba(255,255,255,0.2);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(15px);
+font-family:'Dancing Script',cursive;
+font-size:28px;
+line-height:1.6;
+letter-spacing:1px;
+}
+
+/* Celebration */
+#celebration{
+display:none;
+position:absolute;
+text-align:center;
+animation:fadeIn 2s ease forwards;
+}
+
+#celebration h1{
+font-family:'Dancing Script',cursive;
+font-size:50px;
+margin-bottom:15px;
+}
+
+.glow{
+font-size:30px;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{ text-shadow:0 0 10px white; }
+to{ text-shadow:0 0 25px pink; }
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+@media(max-width:600px){
+.card h1{
+font-size:32px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PASSWORD LOCK -->
+<div id="lockScreen">
+<h1>Only For Nishuu ❤️</h1>
+<p>Enter our special word</p>
+<input type="password" id="password" placeholder="Hint: our memory">
+<br>
+<button id="enterBtn">Unlock ❤️</button>
+</div>
+
+<!-- PROPOSAL -->
+<div class="card" id="proposal">
+<h1>Nishuu, Will You Be My Valentine? ❤️</h1>
+<button id="yesBtn">Yes 💕</button>
+<button id="noBtn">No 😢</button>
+</div>
+
+<!-- LOVE LETTER -->
+<div id="letter">
+<p>
+My Dearest Nishuu ❤️<br><br>
+Happy Valentine’s Day 🤍
+I’m really grateful you’re in my life. That’s all I’ll say today.<br><br>
+Lovee youu ❤️
+</p>
+</div>
+
+<script>
+const lockScreen = document.getElementById("lockScreen");
+const proposal = document.getElementById("proposal");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const letter = document.getElementById("letter");
+const celebration = document.getElementById("celebration");
+
+/* Password */
+document.getElementById("enterBtn").onclick = function(){
+let pass = document.getElementById("password").value;
+if(pass.trim() === "11:09"){
+lockScreen.style.display="none";
+proposal.style.display="block";
+}else{
+alert("Wrong password Nishuu 😘 Try again");
+}
+};
+
+/* Make NO button move when hovered */
+function moveNoButton() {
+    const cardRect = proposal.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const maxX = cardRect.width - btnRect.width - 20;
+    const maxY = cardRect.height - btnRect.height - 20;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+
+/* YES CLICK */
+yesBtn.onclick=function(){
+proposal.style.display="none";
+letter.style.display="block";
+setTimeout(()=>{
+letter.style.display="none";
+celebration.style.display="block";
+launchConfetti();
+},20000);
+};
+
+/* Confetti */
+function launchConfetti(){
+for(let i=0;i<120;i++){
+let c=document.createElement("div");
+c.style.position="absolute";
+c.style.width="8px";
+c.style.height="8px";
+c.style.background="white";
+c.style.top=Math.random()*window.innerHeight+"px";
+c.style.left=Math.random()*window.innerWidth+"px";
+c.style.opacity="0.8";
+c.style.transition="3s";
+document.body.appendChild(c);
+setTimeout(()=>{c.style.transform="translateY(-500px)";},50);
+}
+}
+</script>
+
+</body>
+</html>
