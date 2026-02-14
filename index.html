@@ -15,8 +15,9 @@ box-sizing:border-box;
 }
 
 body{
-height:100vh;
-overflow:hidden;
+min-height:100vh;
+overflow-x:hidden;
+overflow-y:auto;
 font-family:'Poppins',sans-serif;
 color:white;
 display:flex;
@@ -165,7 +166,7 @@ Lovee youu ❤️
 </div>
 
 <!-- SECRET SECTION -->
-<div id="secretSection" style="display:none; position:absolute; bottom:30px;">
+<div id="secretSection" style="display:none; margin-top:20px;">
     <button id="secretBtn" style="background:transparent; border:none; color:white; font-size:14px; opacity:0.7; cursor:pointer;">
         There's something more...
     </button>
@@ -177,8 +178,8 @@ Lovee youu ❤️
     </div>
 </div>
 
-<div id="finalMessage" style="display:none; position:absolute; text-align:center; padding:20px;">
-    <h2 style="font-family:'Dancing Script',cursive; font-size:40px;">
+<div id="finalMessage" style="display:none; text-align:center; padding:30px 20px; max-width:600px;">
+    <h2 style="font-family:'Dancing Script',cursive; font-size:28px; line-height:1.6;">
         I’ve tried to keep this simple in my head, but I can’t ignore it anymore.
         What I feel for you isn’t just attraction or comfort — it’s something deeper.
         I don’t want to rush you, and I don’t want to pressure you.
@@ -304,6 +305,7 @@ unlockSecret.addEventListener("click", function(){
 
 </body>
 </html>
+
 
 
 
