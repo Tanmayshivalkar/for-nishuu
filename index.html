@@ -183,11 +183,11 @@ alert("Wrong password Nishuu 😘 Try again");
 }
 };
 
-/* YES Button Moves 4 Times */
 let yesMoveCount = 0;
-const maxMoves = 8;
+const maxMoves = 4;
 
 function moveYesButton() {
+
     if (yesMoveCount < maxMoves) {
 
         const cardRect = proposal.getBoundingClientRect();
@@ -204,13 +204,35 @@ function moveYesButton() {
         yesBtn.style.top = randomY + "px";
 
         yesMoveCount++;
+
+        // Change text after each move
+        if (yesMoveCount === 1) {
+            yesBtn.innerText = "Are you sure? 😏";
+        }
+        else if (yesMoveCount === 2) {
+            yesBtn.innerText = "Think again 💕";
+        }
+        else if (yesMoveCount === 3) {
+            yesBtn.innerText = "Say it properly 😌";
+        }
+        else if (yesMoveCount === 4) {
+            yesBtn.innerText = "Click me if you mean it ❤️";
+
+            // Reset position so it stays still
+            yesBtn.style.position = "relative";
+            yesBtn.style.left = "0px";
+            yesBtn.style.top = "0px";
+        }
     }
 }
 
+/* Desktop */
 yesBtn.addEventListener("mouseenter", moveYesButton);
+
+/* Mobile */
 yesBtn.addEventListener("touchstart", function(e){
     if (yesMoveCount < maxMoves) {
-        e.preventDefault();  // stop instant click
+        e.preventDefault();
         moveYesButton();
     }
 });
@@ -257,6 +279,7 @@ setTimeout(()=>{c.style.transform="translateY(-500px)";},50);
 
 </body>
 </html>
+
 
 
 
