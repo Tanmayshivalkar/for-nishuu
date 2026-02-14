@@ -207,6 +207,13 @@ function moveYesButton() {
 }
 
 yesBtn.addEventListener("mouseenter", moveYesButton);
+yesBtn.addEventListener("touchstart", function(e){
+    if (yesMoveCount < maxMoves) {
+        e.preventDefault();  // stop instant click
+        moveYesButton();
+    }
+});
+
 
 /* NO Button Popup */
 noBtn.addEventListener("click", function(){
@@ -249,5 +256,6 @@ setTimeout(()=>{c.style.transform="translateY(-500px)";},50);
 
 </body>
 </html>
+
 
 
