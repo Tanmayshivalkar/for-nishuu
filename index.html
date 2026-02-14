@@ -184,22 +184,11 @@ alert("Wrong password Nishuu 😘 Try again");
 };
 
 let yesMoveCount = 0;
-const moveLimit = 4;
-let messageStage = 0;
+const maxMoves = 4;
 
-const messages = [
-    "Are you sure? 😏",
-    "Think again 💕",
-    "Say it properly 😌",
-    "Click me if you mean it ❤️"
-];
+function moveYesButton() {
 
-function handleYesInteraction(e) {
-
-    if (yesMoveCount < moveLimit) {
-
-        // First 4 times → only move, keep text as YES
-        e.preventDefault();
+    if (yesMoveCount < maxMoves) {
 
         const cardRect = proposal.getBoundingClientRect();
         const btnRect = yesBtn.getBoundingClientRect();
@@ -215,15 +204,25 @@ function handleYesInteraction(e) {
         yesBtn.style.top = randomY + "px";
 
         yesMoveCount++;
-    }
-    else if (messageStage < messages.length) {
 
-        // After 4 moves → start showing messages
-        e.preventDefault();
+        // Change text after each move
+        if (yesMoveCount === 1) {
+            yesBtn.innerText = "Are you sure? 😏";
+        }
+        else if (yesMoveCount === 2) {
+            yesBtn.innerText = "Think again 💕";
+        }
+        else if (yesMoveCount === 3) {
+            yesBtn.innerText = "Say it properly 😌";
+        }
+        else if (yesMoveCount === 4) {
+            yesBtn.innerText = "Click me if you mean it ❤️";
 
-        yesBtn.innerText = messages[messageStage];
-        messageStage++;
-
+            // Reset position so it stays still
+            yesBtn.style.position = "relative";
+            yesBtn.style.left = "0px";
+            yesBtn.style.top = "0px";
+        }
     }
 }
 
@@ -280,6 +279,7 @@ setTimeout(()=>{c.style.transform="translateY(-500px)";},50);
 
 </body>
 </html>
+
 
 
 
