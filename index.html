@@ -101,11 +101,9 @@ transform:scale(1.1);
 }
 
 #noBtn{
-position:absolute;
 background:transparent;
 border:2px solid white;
 color:white;
-transition: 0.2s ease;
 }
 
 /* Love Letter */
@@ -122,35 +120,6 @@ font-family:'Dancing Script',cursive;
 font-size:28px;
 line-height:1.6;
 letter-spacing:1px;
-}
-
-/* Celebration */
-#celebration{
-display:none;
-position:absolute;
-text-align:center;
-animation:fadeIn 2s ease forwards;
-}
-
-#celebration h1{
-font-family:'Dancing Script',cursive;
-font-size:50px;
-margin-bottom:15px;
-}
-
-.glow{
-font-size:30px;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{ text-shadow:0 0 10px white; }
-to{ text-shadow:0 0 25px pink; }
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
 }
 
 @media(max-width:600px){
@@ -201,7 +170,6 @@ const proposal = document.getElementById("proposal");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const letter = document.getElementById("letter");
-const celebration = document.getElementById("celebration");
 
 /* Password */
 document.getElementById("enterBtn").onclick = function(){
@@ -214,34 +182,52 @@ alert("Wrong password Nishuu 😘 Try again");
 }
 };
 
-/* Make NO button move when hovered */
-function moveNoButton() {
-    const cardRect = proposal.getBoundingClientRect();
-    const btnRect = noBtn.getBoundingClientRect();
+/* YES Button Moves 4 Times */
+let yesMoveCount = 0;
+const maxMoves = 4;
 
-    const maxX = cardRect.width - btnRect.width - 20;
-    const maxY = cardRect.height - btnRect.height - 20;
+function moveYesButton() {
+    if (yesMoveCount < maxMoves) {
 
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
+        const cardRect = proposal.getBoundingClientRect();
+        const btnRect = yesBtn.getBoundingClientRect();
 
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
+        const maxX = cardRect.width - btnRect.width - 20;
+        const maxY = cardRect.height - btnRect.height - 20;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        yesBtn.style.position = "absolute";
+        yesBtn.style.left = randomX + "px";
+        yesBtn.style.top = randomY + "px";
+
+        yesMoveCount++;
+    }
 }
 
-noBtn.addEventListener("mouseenter", moveNoButton);
+yesBtn.addEventListener("mouseenter", moveYesButton);
 
+/* NO Button Popup */
+noBtn.addEventListener("click", function(){
+    alert("No is not the answer as it's not possible, try clicking on yess again.");
+});
 
-/* YES CLICK */
-yesBtn.onclick=function(){
-proposal.style.display="none";
-letter.style.display="block";
-setTimeout(()=>{
-letter.style.display="none";
-celebration.style.display="block";
-launchConfetti();
-},20000);
-};
+/* YES Click After 4 Moves */
+yesBtn.addEventListener("click", function(){
+
+    if (yesMoveCount >= maxMoves) {
+
+        proposal.style.display="none";
+        letter.style.display="block";
+
+        setTimeout(()=>{
+            letter.style.display="none";
+            launchConfetti();
+        },20000);
+
+    }
+});
 
 /* Confetti */
 function launchConfetti(){
@@ -263,5 +249,3 @@ setTimeout(()=>{c.style.transform="translateY(-500px)";},50);
 
 </body>
 </html>
-
-
