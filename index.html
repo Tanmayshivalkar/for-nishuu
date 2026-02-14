@@ -94,7 +94,6 @@ margin-bottom:20px;
 #yesBtn{
 background:white;
 color:#ff4d6d;
-position: relative;
 }
 
 #yesBtn:hover{
@@ -150,7 +149,7 @@ font-size:32px;
 
 <!-- PROPOSAL -->
 <div class="card" id="proposal">
-<h1>Nishuu, are you the pretiest girl in this World? ❤️</h1>
+<h1>Nishuu, Will You Be My Valentine? ❤️</h1>
 <button id="yesBtn">Yes 💕</button>
 <button id="noBtn">No 😢</button>
 </div>
@@ -160,7 +159,7 @@ font-size:32px;
 <p>
 My Dearest Nishuu ❤️<br><br>
 Happy Valentine’s Day 🤍
-I’m really grateful you’re in my life. That’s all I’ll say today. I hope you always have reasons to smile — today and forever.<br><br>
+I’m really grateful you’re in my life. That’s all I’ll say today.<br><br>
 Lovee youu ❤️
 </p>
 </div>
@@ -183,11 +182,11 @@ alert("Wrong password Nishuu 😘 Try again");
 }
 };
 
+/* YES Button Moves 4 Times */
 let yesMoveCount = 0;
-const maxMoves = 4;
+const maxMoves = 8;
 
 function moveYesButton() {
-
     if (yesMoveCount < maxMoves) {
 
         const cardRect = proposal.getBoundingClientRect();
@@ -204,35 +203,13 @@ function moveYesButton() {
         yesBtn.style.top = randomY + "px";
 
         yesMoveCount++;
-
-        // Change text after each move
-        if (yesMoveCount === 1) {
-            yesBtn.innerText = "Are you sure? 😏";
-        }
-        else if (yesMoveCount === 2) {
-            yesBtn.innerText = "Think again 💕";
-        }
-        else if (yesMoveCount === 3) {
-            yesBtn.innerText = "Say it properly 😌";
-        }
-        else if (yesMoveCount === 4) {
-            yesBtn.innerText = "Click me if you mean it ❤️";
-
-            // Reset position so it stays still
-            yesBtn.style.position = "relative";
-            yesBtn.style.left = "0px";
-            yesBtn.style.top = "0px";
-        }
     }
 }
 
-/* Desktop */
 yesBtn.addEventListener("mouseenter", moveYesButton);
-
-/* Mobile */
 yesBtn.addEventListener("touchstart", function(e){
     if (yesMoveCount < maxMoves) {
-        e.preventDefault();
+        e.preventDefault();  // stop instant click
         moveYesButton();
     }
 });
@@ -254,7 +231,7 @@ yesBtn.addEventListener("click", function(){
         setTimeout(()=>{
             letter.style.display="none";
             launchConfetti();
-        },30000);
+        },20000);
 
     }
 });
@@ -279,13 +256,3 @@ setTimeout(()=>{c.style.transform="translateY(-500px)";},50);
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
