@@ -123,6 +123,27 @@ line-height:1.6;
 letter-spacing:1px;
 }
 
+/* Continuation + OpenWhen + Final */
+#continuation,
+#openWhenSection,
+#secretSection,
+#finalMessage{
+display:none;
+text-align:center;
+padding:30px;
+max-width:600px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(20px);
+border-radius:20px;
+}
+
+.openBtn{
+display:block;
+margin:10px auto;
+background:white;
+color:#ff4d6d;
+}
+
 @media(max-width:600px){
 .card h1{
 font-size:32px;
@@ -165,149 +186,239 @@ Lovee youu ❤️
 </p>
 </div>
 
-<!-- SECRET SECTION -->
-<div id="secretSection" style="display:none; margin-top:20px;">
-    <button id="secretBtn" style="background:transparent; border:none; color:white; font-size:14px; opacity:0.7; cursor:pointer;">
-        There's something more...
-    </button>
+<!-- CONTINUATION -->
+<div id="continuation">
+<h2 style="font-family:'Dancing Script'; font-size:32px;">
+This wasn’t just for Valentine’s Day…
+</h2>
 
-    <div id="secretPasswordBox" style="display:none; margin-top:10px;">
-        <input type="password" id="secretPassword" placeholder="One last secret">
-        <br>
-        <button id="unlockSecret">Unlock 💖</button>
-    </div>
+<p>It was always meant for you ❤️</p>
+
+<button id="continueBtn">Continue 💕</button>
 </div>
 
-<div id="finalMessage" style="display:none; text-align:center; padding:30px 20px; max-width:600px;">
-    <h2 style="font-family:'Dancing Script',cursive; font-size:28px; line-height:1.6;">
-        I’ve tried to keep this simple in my head, but I can’t ignore it anymore.
-        What I feel for you isn’t just attraction or comfort — it’s something deeper.
-        I don’t want to rush you, and I don’t want to pressure you.
-        I just know that I genuinely like you and I see something meaningful with you.
-        If you’re willing, I’d like to take this forward — slowly, properly, and with clarity 🤍
-    </h2>
+<!-- OPEN WHEN -->
+<div id="openWhenSection">
+
+<button class="openBtn" onclick="showMessage(0)">Open when you miss me 💌</button>
+<button class="openBtn" onclick="showMessage(1)" style="display:none;">Open when you're sad 🌧️</button>
+<button class="openBtn" onclick="showMessage(2)" style="display:none;">Open when you're smiling 😊</button>
+<button class="openBtn" onclick="showMessage(3)" style="display:none;">Open when you think of us ❤️</button>
+
+<p id="openMessage" style="font-family:'Dancing Script'; font-size:26px;"></p>
+
 </div>
-    
+
+<!-- SECRET -->
+<div id="secretSection">
+
+<button id="secretBtn">There's something more...</button>
+
+<div id="secretPasswordBox" style="display:none;">
+<input type="password" id="secretPassword">
+<button id="unlockSecret">Unlock 💖</button>
+</div>
+
+</div>
+
+<!-- FINAL -->
+<div id="finalMessage">
+
+<h2 style="font-family:'Dancing Script'; font-size:28px; line-height:1.6;">
+I’ve tried to keep this simple in my head, but I can’t ignore it anymore.
+What I feel for you isn’t just attraction or comfort — it’s something deeper.
+I don’t want to rush you, and I don’t want to pressure you.
+I just know that I genuinely like you and I see something meaningful with you.
+If you’re willing, I’d like to take this forward — slowly, properly, and with clarity 🤍
+</h2>
+
+</div>
+
 <script>
+
+/* ELEMENTS */
 const lockScreen = document.getElementById("lockScreen");
 const proposal = document.getElementById("proposal");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const letter = document.getElementById("letter");
 
-/* Password */
-document.getElementById("enterBtn").onclick = function(){
-let pass = document.getElementById("password").value;
-if(pass.trim() === "11:09"){
+const continuation = document.getElementById("continuation");
+const continueBtn = document.getElementById("continueBtn");
+
+const openWhenSection = document.getElementById("openWhenSection");
+const secretSection = document.getElementById("secretSection");
+const finalMessage = document.getElementById("finalMessage");
+
+/* PASSWORD */
+document.getElementById("enterBtn").onclick=function(){
+
+if(document.getElementById("password").value==="11:0009"){
+
 lockScreen.style.display="none";
 proposal.style.display="block";
+
 }else{
-alert("Wrong password Nishuu 😘 Try again");
+
+alert("Wrong password Nishuu 😘");
+
 }
+
 };
 
-/* YES Button Moves 4 Times */
-let yesMoveCount = 0;
-const maxMoves = 8;
+/* YES BUTTON MOVE */
+let yesMoveCount=0;
+const maxMoves=8;
 
-function moveYesButton() {
-    if (yesMoveCount < maxMoves) {
+function moveYesButton(){
 
-        const cardRect = proposal.getBoundingClientRect();
-        const btnRect = yesBtn.getBoundingClientRect();
+if(yesMoveCount<maxMoves){
 
-        const maxX = cardRect.width - btnRect.width - 20;
-        const maxY = cardRect.height - btnRect.height - 20;
+const rect=proposal.getBoundingClientRect();
 
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
+yesBtn.style.position="absolute";
+yesBtn.style.left=Math.random()*(rect.width-100)+"px";
+yesBtn.style.top=Math.random()*(rect.height-50)+"px";
 
-        yesBtn.style.position = "absolute";
-        yesBtn.style.left = randomX + "px";
-        yesBtn.style.top = randomY + "px";
+yesMoveCount++;
 
-        yesMoveCount++;
-    }
 }
 
-yesBtn.addEventListener("mouseenter", moveYesButton);
-yesBtn.addEventListener("touchstart", function(e){
-    if (yesMoveCount < maxMoves) {
-        e.preventDefault();  // stop instant click
-        moveYesButton();
-    }
+}
+
+yesBtn.addEventListener("mouseenter",moveYesButton);
+
+yesBtn.addEventListener("touchstart",function(e){
+
+if(yesMoveCount<maxMoves){
+
+e.preventDefault();
+moveYesButton();
+
+}
+
 });
 
+/* NO BUTTON */
+noBtn.onclick=function(){
 
-/* NO Button Popup */
-noBtn.addEventListener("click", function(){
-    alert("No is not the answer as it's not possible, try clicking on yess again.");
-});
+alert("No is not the answer 😌");
 
-/* YES Click After 4 Moves */
-yesBtn.addEventListener("click", function(){
+};
 
-    if (yesMoveCount >= maxMoves) {
+/* YES CLICK */
+yesBtn.onclick=function(){
 
-        proposal.style.display="none";
-        letter.style.display="block";
+if(yesMoveCount>=maxMoves){
 
-        setTimeout(()=>{
-            letter.style.display="none";
-            launchConfetti();
-            document.getElementById("secretSection").style.display = "block";
-        },20000);
+proposal.style.display="none";
+letter.style.display="block";
 
-    }
-});
+setTimeout(()=>{
 
-/* Confetti */
+letter.style.display="none";
+launchConfetti();
+continuation.style.display="block";
+
+},20000);
+
+}
+
+};
+
+/* CONTINUE */
+continueBtn.onclick=function(){
+
+continuation.style.display="none";
+openWhenSection.style.display="block";
+
+};
+
+/* OPEN WHEN */
+const messages=[
+
+"Even when I’m not around, I hope you remember that you matter to me.",
+
+"If you're sad, I'm always here.",
+
+"Your smile means everything to me.",
+
+"Us… is something I truly care about."
+
+];
+
+function showMessage(i){
+
+document.getElementById("openMessage").innerText=messages[i];
+
+const buttons=document.getElementsByClassName("openBtn");
+
+if(i+1<buttons.length){
+
+buttons[i+1].style.display="block";
+
+}else{
+
+setTimeout(()=>{
+
+openWhenSection.style.display="none";
+secretSection.style.display="block";
+
+},2000);
+
+}
+
+}
+
+/* SECRET */
+document.getElementById("secretBtn").onclick=function(){
+
+document.getElementById("secretPasswordBox").style.display="block";
+
+};
+
+document.getElementById("unlockSecret").onclick=function(){
+
+if(document.getElementById("secretPassword").value==="Nishuulol"){
+
+secretSection.style.display="none";
+finalMessage.style.display="block";
+
+}else{
+
+alert("Wrong secret");
+
+}
+
+};
+
+/* CONFETTI */
 function launchConfetti(){
+
 for(let i=0;i<120;i++){
+
 let c=document.createElement("div");
+
 c.style.position="absolute";
-c.style.width="8px";
-c.style.height="8px";
+c.style.width="6px";
+c.style.height="6px";
 c.style.background="white";
 c.style.top=Math.random()*window.innerHeight+"px";
 c.style.left=Math.random()*window.innerWidth+"px";
-c.style.opacity="0.8";
-c.style.transition="3s";
+
 document.body.appendChild(c);
-setTimeout(()=>{c.style.transform="translateY(-500px)";},50);
+
+setTimeout(()=>{
+
+c.style.transform="translateY(-400px)";
+
+},50);
+
 }
+
 }
 
-const secretBtn = document.getElementById("secretBtn");
-const secretPasswordBox = document.getElementById("secretPasswordBox");
-const unlockSecret = document.getElementById("unlockSecret");
-const finalMessage = document.getElementById("finalMessage");
-
-secretBtn.addEventListener("click", function(){
-    secretPasswordBox.style.display = "block";
-});
-
-unlockSecret.addEventListener("click", function(){
-    const secretPass = document.getElementById("secretPassword").value;
-
-    if(secretPass.trim().toLowerCase() === "Nishuulol"){
-        document.getElementById("secretSection").style.display = "none";
-        proposal.style.display = "none";
-        letter.style.display = "none";
-        finalMessage.style.display = "block";
-    } else {
-        alert("That's not it 😌 Try again.");
-    }
-});
-
-    
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
