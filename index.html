@@ -206,6 +206,15 @@ This wasn’t just for Valentine’s Day…
 <button class="openBtn" onclick="showMessage(3)" style="display:none;">Open when you think of us ❤️</button>
 
 <p id="openMessage" style="font-family:'Dancing Script'; font-size:26px;"></p>
+<p id="thankYouLine" style="
+display:none;
+margin-top:18px;
+font-family:'Dancing Script';
+font-size:24px;
+opacity:0.85;
+">
+And if you’ve read everything till here… thank you for staying.
+</p>
 
 </div>
 
@@ -253,7 +262,7 @@ const finalMessage = document.getElementById("finalMessage");
 /* PASSWORD */
 document.getElementById("enterBtn").onclick=function(){
 
-if(document.getElementById("password").value==="11:0009"){
+if(document.getElementById("password").value==="11:09"){
 
 lockScreen.style.display="none";
 proposal.style.display="block";
@@ -359,16 +368,26 @@ buttons[i+1].style.display="block";
 
 }else{
 
+/* SHOW THANK YOU LINE FIRST */
+
+document.getElementById("thankYouLine").style.display="block";
+
+/* THEN SECRET SECTION AFTER DELAY */
+
 setTimeout(()=>{
 
 openWhenSection.style.display="none";
+
+document.getElementById("thankYouLine").style.display="none";
+
 secretSection.style.display="block";
 
-},2000);
+},4000);
 
 }
 
 }
+
 
 /* SECRET */
 document.getElementById("secretBtn").onclick=function(){
@@ -422,4 +441,5 @@ c.style.transform="translateY(-400px)";
 
 </body>
 </html>
+
 
