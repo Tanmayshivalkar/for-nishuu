@@ -13,7 +13,7 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 }
-
+  
 body{
 min-height:100vh;
 overflow-x:hidden;
@@ -27,6 +27,7 @@ text-align:center;
 position:relative;
 }
 
+/* UPDATED BACKGROUND FOR 9 IMAGES */
 .bg{
 position:fixed;
 width:100%;
@@ -36,9 +37,10 @@ background-position:center;
 filter:blur(6px) brightness(0.6);
 z-index:-1;
 animation:slide 54s infinite;
-transition: background-image 2s ease-in-out;
+transition:background-image 2s ease-in-out;
 }
 
+/* 9 IMAGE SLIDESHOW */
 @keyframes slide{
 0%{background-image:url('photo1.jpg')}
 11.11%{background-image:url('photo2.jpg')}
@@ -228,6 +230,8 @@ If you’re willing, I’d like to take this forward — slowly, properly, and w
 
 <script>
 
+/* YOUR ENTIRE ORIGINAL SCRIPT — UNCHANGED */
+
 const lockScreen = document.getElementById("lockScreen");
 const proposal = document.getElementById("proposal");
 const yesBtn = document.getElementById("yesBtn");
@@ -262,6 +266,7 @@ yesMoveCount++;
 }
 
 yesBtn.addEventListener("mouseenter",moveYesButton);
+
 yesBtn.addEventListener("touchstart",function(e){
 if(yesMoveCount<maxMoves){
 e.preventDefault();
@@ -290,12 +295,11 @@ continuation.style.display="none";
 openWhenSection.style.display="block";
 };
 
-const messages=[
-"If you’re here, it means there’s a moment where my absence found you. I want you to know… you don’t have to hide that. Missing someone just means the connection was real. And no matter the distance or silence, a part of me has always stayed close to you — quietly, without asking for anything.",
-"I wish I could sit next to you right now and remind you that this feeling will not last forever. You don’t have to be strong every second. You’re allowed to pause, to breathe, to feel. And even if the world feels heavy, you are still someone worth protecting, worth loving, and worth staying for.",
-"Your smile has always been my favorite proof that light still exists in this world. I hope whatever made you smile stays with you a little longer today. And I hope you never forget how beautiful you look when you’re genuinely happy.",
-"Whatever “us” means today, tomorrow, or in the future… I want you to know that what we shared was never ordinary to me. Some people enter our lives and quietly change everything. You were never just a moment to me — you were a feeling that stayed."
-];
+const messages=[ "If you’re here, it means there’s a moment where my absence found you. I want you to know… you don’t have to hide that. Missing someone just means the connection was real. And no matter the distance or silence, a part of me has always stayed close to you — quietly, without asking for anything.",
+                 "I wish I could sit next to you right now and remind you that this feeling will not last forever. You don’t have to be strong every second. You’re allowed to pause, to breathe, to feel. And even if the world feels heavy, you are still someone worth protecting, worth loving, and worth staying for.", 
+                 "Your smile has always been my favorite proof that light still exists in this world. I hope whatever made you smile stays with you a little longer today. And I hope you never forget how beautiful you look when you’re genuinely happy.", 
+                 "Whatever “us” means today, tomorrow, or in the future… I want you to know that what we shared was never ordinary to me. Some people enter our lives and quietly change everything. You were never just a moment to me — you were a feeling that stayed." ];;
+
 
 function showMessage(i){
 document.getElementById("openMessage").innerText=messages[i];
@@ -347,6 +351,3 @@ setTimeout(()=>{c.style.transform="translateY(-400px)"},50);
 
 </body>
 </html>
-
-
-
