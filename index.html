@@ -29,12 +29,13 @@ position:relative;
 
 .bg-container{
 position:fixed;
-width:100%;
-height:100%;
 top:0;
 left:0;
+width:100%;
+height:100%;
 z-index:-1;
 overflow:hidden;
+background:black; /* prevents white flash */
 }
 
 .bg-slide{
@@ -43,13 +44,15 @@ width:100%;
 height:100%;
 background-size:cover;
 background-position:center;
-filter:blur(6px) brightness(0.6);
 opacity:0;
-transition:opacity 2s ease-in-out;
+transition:opacity 1.5s ease-in-out;
+filter:blur(4px) brightness(0.6);
+transform:scale(1.08);
 }
 
 .bg-slide.active{
 opacity:1;
+z-index:1;
 }
 
 /* 9 IMAGE SLIDESHOW */
@@ -379,7 +382,11 @@ setInterval(() => {
 
 slides[currentSlide].classList.remove("active");
 
-currentSlide = (currentSlide + 1) % slides.length;
+currentSlide++;
+
+if(currentSlide >= slides.length){
+currentSlide = 0;
+}
 
 slides[currentSlide].classList.add("active");
 
@@ -389,5 +396,6 @@ slides[currentSlide].classList.add("active");
 
 </body>
 </html>
+
 
 
