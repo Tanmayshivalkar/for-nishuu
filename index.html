@@ -27,7 +27,6 @@ text-align:center;
 position:relative;
 }
 
-/* Background slideshow */
 .bg{
 position:fixed;
 width:100%;
@@ -46,7 +45,6 @@ animation:slide 18s infinite;
 100%{background-image:url('photo1.jpg')}
 }
 
-/* Password screen */
 #lockScreen{
 position:absolute;
 }
@@ -74,7 +72,6 @@ background:white;
 color:#ff4d6d;
 }
 
-/* Proposal Card */
 .card{
 display:none;
 background:rgba(255,255,255,0.15);
@@ -107,7 +104,6 @@ border:2px solid white;
 color:white;
 }
 
-/* Love Letter */
 #letter{
 display:none;
 position:absolute;
@@ -123,7 +119,6 @@ line-height:1.6;
 letter-spacing:1px;
 }
 
-/* Continuation + OpenWhen + Final */
 #continuation,
 #openWhenSection,
 #secretSection,
@@ -144,23 +139,17 @@ background:white;
 color:#ff4d6d;
 }
 
-@media(max-width:600px){
-.card h1{
-font-size:32px;
-}
-}
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>s
+<div class="bg"></div>
 
 <audio autoplay loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PASSWORD LOCK -->
 <div id="lockScreen">
 <h1>Only For Nishuu ❤️</h1>
 <p>Enter the moment the world became more beautiful ✨</p>
@@ -169,14 +158,12 @@ font-size:32px;
 <button id="enterBtn">Unlock ❤️</button>
 </div>
 
-<!-- PROPOSAL -->
 <div class="card" id="proposal">
 <h1>Nishuu, are you the prettiest girl in this world? ❤️</h1>
 <button id="yesBtn">Yes 💕</button>
 <button id="noBtn">No 😢</button>
 </div>
 
-<!-- LOVE LETTER -->
 <div id="letter">
 <p>
 My Dearest Nishuu ❤️<br><br>
@@ -186,18 +173,14 @@ Lovee youu ❤️
 </p>
 </div>
 
-<!-- CONTINUATION -->
 <div id="continuation">
 <h2 style="font-family:'Dancing Script'; font-size:32px;">
 This wasn’t just for Valentine’s Day…
 </h2>
-
 <p>It was always meant for you ❤️</p>
-
 <button id="continueBtn">Continue 💕</button>
 </div>
 
-<!-- OPEN WHEN -->
 <div id="openWhenSection">
 
 <button class="openBtn" onclick="showMessage(0)">Open when you miss me 💌</button>
@@ -206,42 +189,27 @@ This wasn’t just for Valentine’s Day…
 <button class="openBtn" onclick="showMessage(3)" style="display:none;">Open when you think of us ❤️</button>
 
 <p id="openMessage" style="font-family:'Dancing Script'; font-size:26px;"></p>
-<p id="thankYouLine" style="
-display:none;
-margin-top:18px;
-font-family:'Dancing Script';
-font-size:24px;
-opacity:0.85;
-">
+
+<p id="thankYouLine" style="display:none;margin-top:18px;font-family:'Dancing Script';font-size:24px;opacity:0.85;">
 And if you’ve read everything till here… thank you for staying.
 </p>
 
-<button id="finalContinueBtn" style="
-display:none;
-margin-top:20px;
-background:white;
-color:#ff4d6d;
-">
+<button id="finalContinueBtn" style="display:none;margin-top:20px;background:white;color:#ff4d6d;">
 Continue ❤️
 </button>
 
 </div>
 
-<!-- SECRET -->
 <div id="secretSection">
-
 <button id="secretBtn">There's something more...</button>
 
 <div id="secretPasswordBox" style="display:none;">
 <input type="password" id="secretPassword">
 <button id="unlockSecret">Unlock 💖</button>
 </div>
-
 </div>
 
-<!-- FINAL -->
 <div id="finalMessage">
-
 <h2 style="font-family:'Dancing Script'; font-size:28px; line-height:1.6;">
 I’ve tried to keep this simple in my head, but I can’t ignore it anymore.
 What I feel for you isn’t just attraction or comfort — it’s something deeper.
@@ -249,207 +217,126 @@ I don’t want to rush you, and I don’t want to pressure you.
 I just know that I genuinely like you and I see something meaningful with you.
 If you’re willing, I’d like to take this forward — slowly, properly, and with clarity 🤍
 </h2>
-
 </div>
 
 <script>
 
-/* ELEMENTS */
 const lockScreen = document.getElementById("lockScreen");
 const proposal = document.getElementById("proposal");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const letter = document.getElementById("letter");
-
 const continuation = document.getElementById("continuation");
 const continueBtn = document.getElementById("continueBtn");
-
 const openWhenSection = document.getElementById("openWhenSection");
 const secretSection = document.getElementById("secretSection");
 const finalMessage = document.getElementById("finalMessage");
 
-/* PASSWORD */
 document.getElementById("enterBtn").onclick=function(){
-
 if(document.getElementById("password").value==="11:09"){
-
 lockScreen.style.display="none";
 proposal.style.display="block";
-
 }else{
-
 alert("Wrong password Nishuu 😘");
-
 }
-
 };
 
-/* YES BUTTON MOVE */
 let yesMoveCount=0;
 const maxMoves=8;
 
 function moveYesButton(){
-
 if(yesMoveCount<maxMoves){
-
 const rect=proposal.getBoundingClientRect();
-
 yesBtn.style.position="absolute";
 yesBtn.style.left=Math.random()*(rect.width-100)+"px";
 yesBtn.style.top=Math.random()*(rect.height-50)+"px";
-
 yesMoveCount++;
-
 }
-
 }
 
 yesBtn.addEventListener("mouseenter",moveYesButton);
-
 yesBtn.addEventListener("touchstart",function(e){
-
 if(yesMoveCount<maxMoves){
-
 e.preventDefault();
 moveYesButton();
-
 }
-
 });
 
-/* NO BUTTON */
 noBtn.onclick=function(){
-
 alert("No is not the answer 😌");
-
 };
 
-/* YES CLICK */
 yesBtn.onclick=function(){
-
 if(yesMoveCount>=maxMoves){
-
 proposal.style.display="none";
 letter.style.display="block";
-
 setTimeout(()=>{
-
 letter.style.display="none";
 launchConfetti();
 continuation.style.display="block";
-
 },20000);
-
 }
-
 };
 
-/* CONTINUE */
 continueBtn.onclick=function(){
-
 continuation.style.display="none";
 openWhenSection.style.display="block";
-
 };
 
-/* OPEN WHEN */
 const messages=[
-
 "If you’re here, it means there’s a moment where my absence found you. I want you to know… you don’t have to hide that. Missing someone just means the connection was real. And no matter the distance or silence, a part of me has always stayed close to you — quietly, without asking for anything.",
-
 "I wish I could sit next to you right now and remind you that this feeling will not last forever. You don’t have to be strong every second. You’re allowed to pause, to breathe, to feel. And even if the world feels heavy, you are still someone worth protecting, worth loving, and worth staying for.",
-
 "Your smile has always been my favorite proof that light still exists in this world. I hope whatever made you smile stays with you a little longer today. And I hope you never forget how beautiful you look when you’re genuinely happy.",
-
 "Whatever “us” means today, tomorrow, or in the future… I want you to know that what we shared was never ordinary to me. Some people enter our lives and quietly change everything. You were never just a moment to me — you were a feeling that stayed."
-
 ];
 
 function showMessage(i){
-
 document.getElementById("openMessage").innerText=messages[i];
-
 const buttons=document.getElementsByClassName("openBtn");
 
 if(i+1<buttons.length){
-
 buttons[i+1].style.display="block";
-
 }else{
-
-/* SHOW THANK YOU LINE FIRST */
-
 document.getElementById("thankYouLine").style.display="block";
+document.getElementById("finalContinueBtn").style.display="inline-block";
+}
+}
 
-/* THEN SECRET SECTION AFTER DELAY */
-
-setTimeout(()=>{
-
+document.getElementById("finalContinueBtn").onclick=function(){
 openWhenSection.style.display="none";
-
 document.getElementById("thankYouLine").style.display="none";
-
+document.getElementById("finalContinueBtn").style.display="none";
 secretSection.style.display="block";
+};
 
-},4000);
-
-}
-
-}
-
-
-/* SECRET */
 document.getElementById("secretBtn").onclick=function(){
-
 document.getElementById("secretPasswordBox").style.display="block";
-
 };
 
 document.getElementById("unlockSecret").onclick=function(){
-
 if(document.getElementById("secretPassword").value==="Nishuulol"){
-
 secretSection.style.display="none";
 finalMessage.style.display="block";
-
 }else{
-
 alert("Wrong secret");
-
 }
-
 };
 
-/* CONFETTI */
 function launchConfetti(){
-
 for(let i=0;i<120;i++){
-
 let c=document.createElement("div");
-
 c.style.position="absolute";
 c.style.width="6px";
 c.style.height="6px";
 c.style.background="white";
 c.style.top=Math.random()*window.innerHeight+"px";
 c.style.left=Math.random()*window.innerWidth+"px";
-
 document.body.appendChild(c);
-
-setTimeout(()=>{
-
-c.style.transform="translateY(-400px)";
-
-},50);
-
+setTimeout(()=>{c.style.transform="translateY(-400px)"},50);
 }
-
 }
 
 </script>
 
 </body>
 </html>
-
-
-
