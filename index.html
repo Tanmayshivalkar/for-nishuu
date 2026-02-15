@@ -27,17 +27,29 @@ text-align:center;
 position:relative;
 }
 
-/* UPDATED BACKGROUND FOR 9 IMAGES */
-.bg{
+.bg-container{
 position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+overflow:hidden;
+}
+
+.bg-slide{
+position:absolute;
 width:100%;
 height:100%;
 background-size:cover;
 background-position:center;
 filter:blur(6px) brightness(0.6);
-z-index:-1;
-animation:slide 54s infinite;
-transition:background-image 2s ease-in-out;
+opacity:0;
+transition:opacity 2s ease-in-out;
+}
+
+.bg-slide.active{
+opacity:1;
 }
 
 /* 9 IMAGE SLIDESHOW */
@@ -153,7 +165,19 @@ color:#ff4d6d;
 
 <body>
 
-<div class="bg"></div>
+<div class="bg-container">
+
+<div class="bg-slide active" style="background-image:url('photo1.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo2.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo3.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo4.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo5.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo6.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo7.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo8.jpg')"></div>
+<div class="bg-slide" style="background-image:url('photo9.jpg')"></div>
+
+</div>
 
 <audio autoplay loop>
 <source src="music.mp3" type="audio/mpeg">
@@ -347,8 +371,23 @@ setTimeout(()=>{c.style.transform="translateY(-400px)"},50);
 }
 }
 
+const slides = document.querySelectorAll(".bg-slide");
+
+let currentSlide = 0;
+
+setInterval(() => {
+
+slides[currentSlide].classList.remove("active");
+
+currentSlide = (currentSlide + 1) % slides.length;
+
+slides[currentSlide].classList.add("active");
+
+}, 4000);
+
 </script>
 
 </body>
 </html>
+
 
