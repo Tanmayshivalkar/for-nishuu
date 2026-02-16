@@ -182,8 +182,8 @@ color:#ff4d6d;
 
 </div>
 
-<audio autoplay loop>
-<source src="music.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <div id="lockScreen">
@@ -274,6 +274,7 @@ document.getElementById("enterBtn").onclick=function(){
 if(document.getElementById("password").value==="11:09"){
 lockScreen.style.display="none";
 proposal.style.display="block";
+music.play();
 }else{
 alert("Wrong password Nishuu 😘");
 }
@@ -309,6 +310,7 @@ yesBtn.onclick=function(){
 if(yesMoveCount>=maxMoves){
 proposal.style.display="none";
 letter.style.display="block";
+music.play();
 setTimeout(()=>{
 letter.style.display="none";
 launchConfetti();
@@ -392,10 +394,18 @@ slides[currentSlide].classList.add("active");
 
 }, 4000);
 
+const music = document.getElementById("bgMusic");
+
+/* Start music after first interaction */
+document.body.addEventListener("click", function () {
+    music.play();
+}, { once: true });
+
 </script>
 
 </body>
 </html>
+
 
 
 
