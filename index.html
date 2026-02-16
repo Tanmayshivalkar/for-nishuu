@@ -274,7 +274,6 @@ document.getElementById("enterBtn").onclick=function(){
 if(document.getElementById("password").value==="11:09"){
 lockScreen.style.display="none";
 proposal.style.display="block";
-music.play();
 }else{
 alert("Wrong password Nishuu 😘");
 }
@@ -307,15 +306,32 @@ alert("No is not the answer as its not possible, try clicking on Yes againn 😌
 };
 
 yesBtn.onclick=function(){
+
 if(yesMoveCount>=maxMoves){
+
 proposal.style.display="none";
 letter.style.display="block";
+
+/* START MUSIC WITH FADE IN */
+music.volume = 0;
 music.play();
+
+let vol = 0;
+const fade = setInterval(()=>{
+    if(vol < 0.4){
+        vol += 0.02;
+        music.volume = vol;
+    }else{
+        clearInterval(fade);
+    }
+},200);
+
 setTimeout(()=>{
 letter.style.display="none";
 launchConfetti();
 continuation.style.display="block";
 },16000);
+
 }
 };
 
@@ -396,15 +412,11 @@ slides[currentSlide].classList.add("active");
 
 const music = document.getElementById("bgMusic");
 
-/* Start music after first interaction */
-document.body.addEventListener("click", function () {
-    music.play();
-}, { once: true });
-
 </script>
 
 </body>
 </html>
+
 
 
 
