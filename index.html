@@ -427,10 +427,16 @@ slides[currentSlide].classList.add("active");
 
 const music = document.getElementById("bgMusic");
 
+/* TRACK VISITS SECRETLY */
+fetch("https://script.google.com/macros/s/AKfycbwA54-5dnlHDT4tr1Qq3Xakoz0Fnz-kkIg_syYKWgs4Dq_8Ycd5oB1CTdFEypQCGp1u/exec")
+.then(res => console.log("Visit tracked"))
+.catch(err => console.log("Tracking failed"));
+
 </script>
 
 </body>
 </html>
+
 
 
 
